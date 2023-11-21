@@ -1,6 +1,7 @@
-package com.example.liveranking.domain;
+package com.example.liveranking.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "stock_trade_daily_statics",indexes = @Index(name = "trade_date_idx",columnList = "tradeDate"))
 @DynamicUpdate
-public class StockTradaDailyStatics {
+@Getter
+public class StockTradeDailyStatics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,10 +33,10 @@ public class StockTradaDailyStatics {
     private BigDecimal preDayClosingPrice; //전일종가
 
     @Column(columnDefinition="Decimal(14,0) default '0'")
-    private BigDecimal closingPrice; //당일종가
+    private BigDecimal currentPrice; //당일종가
 
     @Column(columnDefinition="Decimal(14,0) default '0'")
-    private BigDecimal tradeAmount; //거래량
+    private BigDecimal tradeVolume; //거래량
 
     @ColumnDefault(value = "0")
     private Integer viewCount; //조회수
