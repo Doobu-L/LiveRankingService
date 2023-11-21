@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class RankingRedisRepository {
@@ -26,6 +27,14 @@ public class RankingRedisRepository {
         this.redisTemplate = redisTemplate;
         this.zSetOperations = redisTemplate.opsForZSet();
         this.stockInfoRedisRepository = stockInfoRedisRepository;
+    }
+
+    public void initRankKeyWithTTL(){
+        for(RankFilter rankFilter : RankFilter.values()){
+            String key = GeneratorUtility.rankFilterKeyGenerateWithDate(rankFilter);
+            zSetOperations.add(key,"100",0);
+            redisTemplate.expire(key, 24, TimeUnit.HOURS);
+        }
     }
 
     public void incrementViewCount(String stockCode){

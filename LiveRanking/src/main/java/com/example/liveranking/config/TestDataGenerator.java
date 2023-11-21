@@ -2,6 +2,7 @@ package com.example.liveranking.config;
 
 import com.example.liveranking.domain.entity.StockInfo;
 import com.example.liveranking.domain.entity.StockTradeDailyStatics;
+import com.example.liveranking.domain.repository.RankingRedisRepository;
 import com.example.liveranking.domain.repository.StockInfoRedisRepository;
 import com.example.liveranking.domain.repository.StockTradeDailyStaticsRepository;
 import com.example.liveranking.service.StockService;
@@ -18,6 +19,7 @@ public class TestDataGenerator {
 
     private final StockTradeDailyStaticsRepository stockTradeDailyStaticsRepository;
     private final StockInfoRedisRepository stockInfoRedisRepository;
+    private final RankingRedisRepository rankingRedisRepository;
     private final StockService stockService;
 
 
@@ -25,6 +27,8 @@ public class TestDataGenerator {
     public void settingSampleDataToRedis() {
         //테스트 데이터 세팅
         List<StockTradeDailyStatics> stockTradeDailyStaticsList = stockTradeDailyStaticsRepository.findAll();
+
+        rankingRedisRepository.initRankKeyWithTTL();
 
         stockTradeDailyStaticsList.stream()
                 .forEach(it -> {
