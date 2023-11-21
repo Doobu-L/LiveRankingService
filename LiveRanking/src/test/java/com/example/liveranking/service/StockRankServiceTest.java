@@ -1,7 +1,7 @@
 package com.example.liveranking.service;
 
 import com.example.liveranking.domain.RankFilter;
-import com.example.liveranking.domain.record.StockCard;
+import com.example.liveranking.domain.record.StockCardRecord;
 import com.example.liveranking.domain.repository.RankingRedisRepository;
 import com.example.liveranking.domain.repository.StockInfoRedisRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +47,7 @@ class StockRankServiceTest {
 
         when(stockInfoRedisRepository.findAllById(anyList())).thenReturn(Collections.emptyList());
 
-        Page<StockCard> result = stockRankService.getStockLiveRankingList(rankFilter, page, size, order);
+        Page<StockCardRecord> result = stockRankService.getStockLiveRankingList(rankFilter, page, size, order);
 
         verify(rankingRedisRepository, times(1)).getStockRankingList(rankFilter, page, size, order);
         verify(stockInfoRedisRepository, times(1)).findAllById(anyList());
