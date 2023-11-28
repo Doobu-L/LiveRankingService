@@ -1,6 +1,3 @@
-# 카카오페이증권 과제평가
-
-
 ### 기술 스택
 Framwork : spring boot 3.1.5<br>
 JDK : openjdk 18<br>
@@ -53,6 +50,5 @@ Redis - StockInfo<br>
 ### 테스트 데이터 세팅을 위한 TestDataGenerator.java 설명
 - 주식종목 별 일일 집계 test data 생성은 flyWay로 sampleData 시트의 종목과 현재가를 insert 하였습니다.
 - TestDataGenerator.java 는 주식종목 별 일일 집계를 진행하는 Batch 가 있다고 가정 하고 만들었습니다.
-- TestDataGenerator.java 는 
 
 
